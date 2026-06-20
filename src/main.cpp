@@ -1,6 +1,5 @@
 #include "main.h"
 #include "pros/misc.hpp"
-#include "pros/motors.hpp"
 #include "math.h"
 #include <string>
 #include <cmath>
