@@ -1,7 +1,7 @@
 #include "main.h"
 #include "lemlib/api.hpp" // IWYU pragma: keep
 #include "robotConfigs.h" // IWYU pragma: keep
-
+#include "pros/motors.hpp"
 
 // Motor Ports for the drivetrain.
 int8_t leftFrontPort = 1;
@@ -9,6 +9,19 @@ int8_t leftBackPort = 2;
 
 int8_t rightFrontPort = 3;
 int8_t rightBackPort = 4;
+
+// 2B lift ports
+
+int8_t LeftLiftPort = 20;
+int8_t RightLiftPort = 19;
+
+
+
+// Motors 
+pros::Motor LeftLift(LeftLiftPort);
+pros::Motor RightLift(RightLiftPort);
+
+
 
 
 
@@ -52,7 +65,7 @@ lemlib::OdomSensors sensors(&vertical_tracking_wheel, // vertical tracking wheel
 
 //                                          PID 
 
-// lateral PID controller
+// lateral PID controller 
 lemlib::ControllerSettings lateral_controller(10, // proportional gain (kP)
                                               0, // integral gain (kI)
                                               3, // derivative gain (kD)

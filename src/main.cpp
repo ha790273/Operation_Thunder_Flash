@@ -8,7 +8,7 @@
 #include "robotConfigs.h" // IWYU pragma: keep
 #include "coloursVision.h" // IWYU pragma: keep
 
-// V1.1.0: Created new configs for cleaner code and easier adjustments for the future
+// V1.1.1: Added Lift motors and ports
 
 
 
@@ -23,7 +23,7 @@ pros::Controller master(pros::E_CONTROLLER_MASTER);
 
 
 // Time Limits for auton 15s period and 1:45 for driver control
-const uint32_t DRIVER_TIME_LIMIT_MS = 106000; // 1 minute and 46 seconds in milliseconds
+const uint32_t DRIVER_TIME_LIMIT_MS = 105000; // 1 minute and 45 seconds in milliseconds
 const uint32_t AUTON_TIME_LIMIT_MS = 15000; // 15 seconds in milliseconds
 
 
@@ -39,6 +39,25 @@ void on_center_button() {
 
 
 /*
+
+void initialize() {
+    pros::lcd::initialize(); // initialize brain screen
+    chassis.calibrate();
+    while (true) { // infinite loop
+        // print measurements from the rotation sensor
+        pros::lcd::print(1, "Vertical Sensor: %i", vertical_sensor.get_position());
+        pros::lcd::print(1, "Horizontal Sensor: %i", horizontal_sensor.get_position());
+        pros::delay(10); // delay to save resources. DO NOT REMOVE
+
+        // Add this code later to figure out if its negative or positive.
+    } 
+}
+
+
+
+*/
+
+// this runs at the start of the program
 // initialize function. Runs on program startup
 void initialize() {
     pros::lcd::initialize(); // initialize brain screen
@@ -57,25 +76,6 @@ void initialize() {
 }
 
 
-
-
-*/
-
-// this runs at the start of the program
-
-
-void initialize() {
-    pros::lcd::initialize(); // initialize brain screen
-    chassis.calibrate();
-    while (true) { // infinite loop
-        // print measurements from the rotation sensor
-        pros::lcd::print(1, "Vertical Sensor: %i", vertical_sensor.get_position());
-        pros::lcd::print(1, "Horizontal Sensor: %i", horizontal_sensor.get_position());
-        pros::delay(10); // delay to save resources. DO NOT REMOVE
-
-        //Replace the code once we figure out if they are negative or positive when its moved.
-    } 
-}
 
 
 void disabled(){}
@@ -110,14 +110,12 @@ void opcontrol() {
 
         if (master.get_digital(pros::E_CONTROLLER_DIGITAL_L1)){
             if (master.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_L1)){
-
+                // spin
             } else if (master.get_digital_new_release(pros::E_CONTROLLER_DIGITAL_L1)){
-
+                // stop
             }
     
         } 
-
-
 
           // delay to save resources
         pros::delay(25);
