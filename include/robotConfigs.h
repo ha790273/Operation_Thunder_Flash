@@ -1,5 +1,7 @@
 #include "lemlib/chassis/chassis.hpp"
 #include "pros/rotation.hpp"
+#include "pros/imu.hpp"
+#include "pros/vision.hpp"
 
 #ifndef _ROBOT_CONFIGS_H_
 #define _ROBOT_CONFIGS_H_
@@ -19,5 +21,8 @@ extern pros::Rotation horizontal_sensor;
 // Other motors for the bot
 
 
+
+// Vision
+extern pros::Vision vision_sensor;
 
 #endif // _ROBOT_CONFIGS_H_

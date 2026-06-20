@@ -9,6 +9,8 @@
 
 
 
+extern pros::Vision vision_sensor;
+
 // Colour signatures for the vision sensor.
 extern pros::vision_signature_s_t RED_SIG;
 extern pros::vision_signature_s_t BLUE_SIG;

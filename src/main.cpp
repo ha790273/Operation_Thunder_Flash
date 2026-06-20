@@ -1,4 +1,5 @@
 #include "main.h"
+#include "pros/misc.h"
 #include "pros/misc.hpp"
 #include "math.h"
 #include <string>
@@ -104,14 +105,21 @@ void opcontrol() {
         // move the robot
         chassis.arcade(leftY, rightX, false, 0.5);
 
-        // delay to save resources
+      
+
+
+        if (master.get_digital(pros::E_CONTROLLER_DIGITAL_L1)){
+            if (master.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_L1)){
+
+            } else if (master.get_digital_new_release(pros::E_CONTROLLER_DIGITAL_L1)){
+
+            }
+    
+        } 
 
 
 
-
-
-
-        
+          // delay to save resources
         pros::delay(25);
     }
 
