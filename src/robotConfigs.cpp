@@ -1,6 +1,6 @@
 #include "main.h"
 #include "lemlib/api.hpp" // IWYU pragma: keep
-
+#include "robotConfigs.h" // IWYU pragma: keep
 
 
 // Motor Ports for the drivetrain.
@@ -22,8 +22,8 @@ pros::Rotation horizontal_sensor(6);
 
 
 // Drivetrain motor groups
-pros::MotorGroup left_motors({leftFrontPort, leftBackPort}, pros::MotorGearset::green); // left motors on ports 
-pros::MotorGroup right_motors({rightFrontPort, rightBackPort}, pros::MotorGearset::green); // right motors on ports 
+pros::MotorGroup left_motors({leftFrontPort, leftBackPort}, pros::MotorGearset::blue); // left motors on ports 
+pros::MotorGroup right_motors({rightFrontPort, rightBackPort}, pros::MotorGearset::blue); // right motors on ports 
 
 
 
