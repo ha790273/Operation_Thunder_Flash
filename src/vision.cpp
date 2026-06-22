@@ -1,6 +1,6 @@
-#include "pros/vision.hpp"
-#include "coloursVision.h"
 
+#include "coloursVision.h"
+#include "main.h"
 // Signatures for the scoreing blocks | Red, Yelllow, Blue, Clear, Gray |
 
 

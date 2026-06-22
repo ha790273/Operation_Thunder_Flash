@@ -7,20 +7,24 @@
 #include "robotConfigs.h" // IWYU pragma: keep
 #include "coloursVision.h" // IWYU pragma: keep
 
+
+
+
 /*
 
-V1.1.2
+V1.1.4
 
 Last change: 6/22/2026 
 
-    - Fixed opcontrol
-    
+    - Added a WIP (Work In Progress) auton selector. ps still in the works
+    - removed the defines with #pragma once 
 */
 
 
 
-// Assets for path(s)
+// Assets for path(s) reworking to use the META path.
 ASSET(BlueAllence_txt);
+
 
 pros::Controller master(pros::E_CONTROLLER_MASTER);
 
@@ -64,7 +68,7 @@ void initialize() {
 
 */
 
-// this runs at the start of the program
+
 // initialize function. Runs on program startup
 void initialize() {
 

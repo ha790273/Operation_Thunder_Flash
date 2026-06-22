@@ -15,16 +15,16 @@
 #ifndef _PROS_MAIN_H_
 #define _PROS_MAIN_H_
 
-/**
- * If defined, some commonly used enums will have preprocessor macros which give
- * a shorter, more convenient naming pattern. If this isn't desired, simply
- * comment the following line out.
- *
- * For instance, E_CONTROLLER_MASTER has a shorter name: CONTROLLER_MASTER.
- * E_CONTROLLER_MASTER is pedantically correct within the PROS styleguide, but
- * not convenient for most student programmers.
+/*
+  If defined, some commonly used enums will have preprocessor macros which give
+  a shorter, more convenient naming pattern. If this isn't desired, simply
+  comment the following line out.
+ 
+  For instance, E_CONTROLLER_MASTER has a shorter name: CONTROLLER_MASTER.
+ E_CONTROLLER_MASTER is pedantically correct within the PROS styleguide, but
+  not convenient for most student programmers.
  */
-#define PROS_USE_SIMPLE_NAMES
+// #define PROS_USE_SIMPLE_NAMES
 
 /**
  * If defined, C++ literals will be available for use. All literals are in the
@@ -36,7 +36,7 @@
 
 #include "api.h"
 #include "lemlib/api.hpp" // IWYU pragma: keep
-
+#include "pros/apix.h"
 /**
  * You should add more #includes here
  */

@@ -1,12 +1,11 @@
+#pragma once
+
+
 #include "lemlib/chassis/chassis.hpp"
 #include "pros/rotation.hpp"
 #include "pros/imu.hpp"
 #include "pros/vision.hpp"
 #include "pros/motors.hpp"
-
-#ifndef _ROBOT_CONFIGS_H_
-#define _ROBOT_CONFIGS_H_
-
 
 // #pragma once (use if feeling lazy at times)
 
@@ -34,4 +33,3 @@ extern pros::Motor RightLift;
 // Vision
 extern pros::Vision vision_sensor;
 
-#endif // _ROBOT_CONFIGS_H_
