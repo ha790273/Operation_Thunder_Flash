@@ -8,6 +8,8 @@
 #define _ROBOT_CONFIGS_H_
 
 
+// #pragma once (use if feeling lazy at times)
+
 // Drivetrian stuff
 extern pros::MotorGroup left_motors;
 extern pros::MotorGroup right_motors;
@@ -16,6 +18,7 @@ extern lemlib::Chassis chassis;
 
 // Odometry stuff
 extern lemlib::OdomSensors sensors;
+extern pros::Imu imu;
 extern pros::Rotation vertical_sensor;
 extern pros::Rotation horizontal_sensor;
 extern lemlib::ControllerSettings lateral_controller; // lateral PID Controller setttings

@@ -1,5 +1,4 @@
 #include "main.h"
-#include "pros/misc.h"
 #include "pros/misc.hpp"
 #include "math.h"
 #include <string>
@@ -8,7 +7,15 @@
 #include "robotConfigs.h" // IWYU pragma: keep
 #include "coloursVision.h" // IWYU pragma: keep
 
-// V1.1.1: Added Lift motors and ports
+/*
+
+V1.1.2
+
+Last change: 6/22/2026 
+
+    - Fixed opcontrol
+    
+*/
 
 
 
@@ -60,6 +67,8 @@ void initialize() {
 // this runs at the start of the program
 // initialize function. Runs on program startup
 void initialize() {
+
+
     pros::lcd::initialize(); // initialize brain screen
     chassis.calibrate(); // calibrate sensors
     // print position to brain screen
@@ -73,6 +82,13 @@ void initialize() {
             pros::delay(20);
         }
     });
+    
+    // sets sigs for the vision sensor
+    vision_sensor.set_signature(1, &RED_SIG);
+    vision_sensor.set_signature(2, &BLUE_SIG);
+    vision_sensor.set_signature(3, &YELLOW_SIG);
+    vision_sensor.set_signature(4, &GREY_SIG);
+    vision_sensor.set_signature(5, &CLEAR_SIG);
 }
 
 
@@ -86,7 +102,7 @@ void competition_initialize() {}
 
 void autonomous() {
     chassis.follow(BlueAllence_txt, 10, 1000000);
-
+    // remove after tuning PID
     
 
 }
@@ -109,13 +125,11 @@ void opcontrol() {
 
 
         if (master.get_digital(pros::E_CONTROLLER_DIGITAL_L1)){
-            if (master.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_L1)){
-                // spin
-            } else if (master.get_digital_new_release(pros::E_CONTROLLER_DIGITAL_L1)){
-                // stop
-            }
+        
     
-        } 
+        }  else{
+
+        }
 
           // delay to save resources
         pros::delay(25);
