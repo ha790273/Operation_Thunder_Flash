@@ -21,6 +21,13 @@ Last change: 6/22/2026
 */
 
 
+/*
+* 
+! Alerts
+? Queries 
+*/
+// TODO: 
+
 
 // Assets for path(s) reworking to use the META path.
 ASSET(BlueAllence_txt);
@@ -105,6 +112,13 @@ void competition_initialize() {}
 
 
 void autonomous() {
+    chassis.setPose(30, 40, 0); // Sets the starting position of the robot
+    chassis.moveToPoint(49.451, 0.137, 2000);
+    chassis.moveToPoint(69.609,-1.483, 2000);
+
+    
+    
+
     chassis.follow(BlueAllence_txt, 10, 1000000);
     // remove after tuning PID
     
@@ -125,13 +139,13 @@ void opcontrol() {
         // move the robot
         chassis.arcade(leftY, rightX, false, 0.5);
 
-      
-
-
-        if (master.get_digital(pros::E_CONTROLLER_DIGITAL_L1)){
+    
+        if (master.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_L1)){
+            intake.move(127);
         
     
-        }  else{
+        }else {
+            intake.move(0);
 
         }
 

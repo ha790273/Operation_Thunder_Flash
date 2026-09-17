@@ -3,6 +3,35 @@
 #include "robotConfigs.h" // IWYU pragma: keep
 #include "pros/motors.hpp"
 
+
+// TODO: Get track length, tune the PIDS and configure  IMU and test odom tracking
+/*
+
+            Cascade
+Blue motors 
+450rpm 
+intake 5.5 
+wrist 5.5w motor 100 rpm 
+roller 5.5w 
+
+cascade 22W
+11W Intake 600 RPM
+
+pnumatics 
+
+Odom
+
+IMEs
+
+
+
+*/
+
+
+
+
+
+
 // Motor Ports for the drivetrain.
 int8_t leftFrontPort = 1;
 int8_t leftBackPort = 2;
@@ -10,19 +39,29 @@ int8_t leftBackPort = 2;
 int8_t rightFrontPort = 3;
 int8_t rightBackPort = 4;
 
-// 2B lift ports
+// Cascade Motors
 
-int8_t LeftLiftPort = 20;
-int8_t RightLiftPort = 19;
-
-
-
-// Motors 
-pros::Motor LeftLift(LeftLiftPort);
-pros::Motor RightLift(RightLiftPort);
+int8_t intakeMotorPort = 8;
+int8_t wristMotorPort = 9;
+int8_t rollerMotorPort = 20;
 
 
 
+
+// General Motor Ports
+
+pros::Motor intake(intakeMotorPort);
+pros::Motor wrist(wristMotorPort);
+pros::Motor roller(rollerMotorPort);
+
+
+
+
+/*
+void intaker(){
+      intake.move(127);
+}
+*/
 
 
 
@@ -44,8 +83,8 @@ pros::MotorGroup right_motors({rightFrontPort, rightBackPort}, pros::MotorGearse
 lemlib::Drivetrain drivetrain(&left_motors, // left motor group
                               &right_motors, // right motor group
                               10, // 10 inch track width
-                              lemlib::Omniwheel::OLD_325, // using old 3.25" omnis
-                              360, // drivetrain rpm is 360
+                              lemlib::Omniwheel::NEW_275, // using new 2.75" omni wheels
+                              450, // drivetrain rpm is 450
                               2 // horizontal drift is 2 (for now)
 );
 
