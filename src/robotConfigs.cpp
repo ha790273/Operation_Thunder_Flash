@@ -4,35 +4,28 @@
 #include "pros/motors.hpp"
 
 
-// TODO: Get track length, tune the PIDS and configure  IMU and test odom tracking
+
 /*
+*                       Cascade Notes
 
-            Cascade
-Blue motors 
-450rpm 
-intake 5.5 
-wrist 5.5w motor 100 rpm 
-roller 5.5w 
+TODO:  Get track length, tune the PIDS and configure  IMU and test odom tracking
+TODO: Get proper odom spacing for tracking wheels
 
-cascade 22W
-11W Intake 600 RPM
+Bot uses Blue motor cartridges on the drivetrain at 450 RPM
+? Cascade 22W
 
-pnumatics 
-
-Odom
-
-IMEs
+The Intake uses a 5.5W motor at 600 RPM
+Wrist uses a 5.5W motor at 100 RPM
+Roller uses a 5.5W motor
 
 
+! Bot is also going to use IME's (Internal Motor Encoders) and possible pneumatics
+
+        
 
 */
 
-
-
-
-
-
-// Motor Ports for the drivetrain.
+// Drivetrain Motors
 int8_t leftFrontPort = 1;
 int8_t leftBackPort = 2;
 
@@ -47,7 +40,6 @@ int8_t rollerMotorPort = 20;
 
 
 
-
 // General Motor Ports
 
 pros::Motor intake(intakeMotorPort);
@@ -57,11 +49,6 @@ pros::Motor roller(rollerMotorPort);
 
 
 
-/*
-void intaker(){
-      intake.move(127);
-}
-*/
 
 
 
@@ -102,7 +89,7 @@ lemlib::OdomSensors sensors(&vertical_tracking_wheel, // vertical tracking wheel
 
 
 
-//                                          PID 
+//!                                          PID 
 
 // lateral PID controller 
 lemlib::ControllerSettings lateral_controller(10, // proportional gain (kP)
@@ -120,19 +107,21 @@ lemlib::ControllerSettings lateral_controller(10, // proportional gain (kP)
 lemlib::ControllerSettings angular_controller(2, // proportional gain (kP)
                                               0, // integral gain (kI)
                                               10, // derivative gain (kD)
-                                              3, // anti windup
-                                              1, // small error range, in degrees
-                                              100, // small error range timeout, in milliseconds
-                                              3, // large error range, in degrees
-                                              500, // large error range timeout, in milliseconds
+                                              0, // anti windup
+                                              0, // small error range, in degrees
+                                              0, // small error range timeout, in milliseconds
+                                              0, // large error range, in degrees
+                                              0, // large error range timeout, in milliseconds
                                               0 // maximum acceleration (slew)
 );
+
 
 // input curve for throttle input during driver control
 lemlib::ExpoDriveCurve throttle_curve(3, // joystick deadband out of 127
                                      10, // minimum output where drivetrain will move out of 127
                                      1.019 // expo curve gain
 );
+
 
 // input curve for steer input during driver control
 lemlib::ExpoDriveCurve steer_curve(3, // joystick deadband out of 127
@@ -149,12 +138,4 @@ lemlib::Chassis chassis(drivetrain, // drivetrain settings
                         &throttle_curve, 
                         &steer_curve
 );
-
-
-
-
-
-
-
-
 

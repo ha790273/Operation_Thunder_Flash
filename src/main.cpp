@@ -12,33 +12,36 @@
 
 /*
 
-V1.1.4
+V1.1.3
 
-Last change: 6/22/2026 
+Last change: 9/18/2026 
 
-    - Added a WIP (Work In Progress) auton selector. ps still in the works
-    - removed the defines with #pragma once 
+*    - Added notes about the Cascade bot    
+
 */
 
 
 /*
 * 
 ! Alerts
-? Queries 
+? Query 
+TODO: 
 */
-// TODO: 
+
 
 
 // Assets for path(s) reworking to use the META path.
-ASSET(BlueAllence_txt);
-
+ASSET(BlueAlliance_txt);
 
 pros::Controller master(pros::E_CONTROLLER_MASTER);
 
 
 // Variables and constants
+const int MaxSpeed = 127;
+const int HalfSpeed = 64;
+const int Stop = 0; 
 
-
+//? Maybe remove the Time Limits in general?? or not
 
 // Time Limits for auton 15s period and 1:45 for driver control
 const uint32_t DRIVER_TIME_LIMIT_MS = 105000; // 1 minute and 45 seconds in milliseconds
@@ -57,28 +60,8 @@ void on_center_button() {
 
 
 /*
-
+! ADD THIS initialize function if the rotation sensors are figured out to be negative or positive.
 void initialize() {
-    pros::lcd::initialize(); // initialize brain screen
-    chassis.calibrate();
-    while (true) { // infinite loop
-        // print measurements from the rotation sensor
-        pros::lcd::print(1, "Vertical Sensor: %i", vertical_sensor.get_position());
-        pros::lcd::print(1, "Horizontal Sensor: %i", horizontal_sensor.get_position());
-        pros::delay(10); // delay to save resources. DO NOT REMOVE
-
-        // Add this code later to figure out if its negative or positive.
-    } 
-}
-
-
-
-*/
-
-
-// initialize function. Runs on program startup
-void initialize() {
-
 
     pros::lcd::initialize(); // initialize brain screen
     chassis.calibrate(); // calibrate sensors
@@ -103,6 +86,24 @@ void initialize() {
 }
 
 
+*/
+
+
+// initialize function. Runs on program startup
+void initialize() {
+    pros::lcd::initialize(); // initialize brain screen
+    chassis.calibrate();
+    while (true) { // infinite loop
+        //! prints measurements from the rotation sensor
+        pros::lcd::print(1, "Vertical Sensor: %i", vertical_sensor.get_position());
+        pros::lcd::print(1, "Horizontal Sensor: %i", horizontal_sensor.get_position());
+        pros::delay(10); // delay to save resources. DO NOT REMOVE
+
+        // Add this code later to figure out if its negative or positive.
+    } 
+}
+
+
 
 
 void disabled(){}
@@ -110,19 +111,34 @@ void disabled(){}
 
 void competition_initialize() {}
 
+/*
 
 void autonomous() {
+
+
+    
     chassis.setPose(30, 40, 0); // Sets the starting position of the robot
-    chassis.moveToPoint(49.451, 0.137, 2000);
+    chassis.moveToPoint(49.451, 0.137, 2000); // Back and forth to change the quadrant color
     chassis.moveToPoint(69.609,-1.483, 2000);
-
+    pros::delay(750);
     
     
 
-    chassis.follow(BlueAllence_txt, 10, 1000000);
+    chassis.follow(BlueAlliance_txt, 10, 1000000);
     // remove after tuning PID
     
 
+}
+
+
+*/
+
+void autonomous() {
+    //! Tune the turning PID!!
+    // set position to x:0, y:0, heading:0
+    chassis.setPose(0, 0, 0);
+    // turn to face heading 90 with a very long timeout
+    chassis.turnToHeading(90, 100000);
 }
 
 
@@ -139,14 +155,16 @@ void opcontrol() {
         // move the robot
         chassis.arcade(leftY, rightX, false, 0.5);
 
-    
+        // ! Change the trigger button to another button later
         if (master.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_L1)){
-            intake.move(127);
+            intake.move(MaxSpeed);
         
     
-        }else {
-            intake.move(0);
+        }else if (master.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_L2)) {
+            intake.move(HalfSpeed);
 
+        }else {
+            intake.move(Stop);
         }
 
           // delay to save resources
