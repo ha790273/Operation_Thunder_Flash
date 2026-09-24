@@ -28,7 +28,7 @@ extern lemlib::ControllerSettings angular_controller; // angular PID Controller 
 extern pros::Motor intake;
 extern pros::Motor wrist;
 extern pros::Motor roller;
-
+extern pros::Motor CascadeLift;
 
 
 // Vision

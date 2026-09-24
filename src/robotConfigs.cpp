@@ -38,6 +38,8 @@ int8_t intakeMotorPort = 8;
 int8_t wristMotorPort = 9;
 int8_t rollerMotorPort = 20;
 
+int8_t CascadeLiftMotorPort = 16;
+
 
 
 // General Motor Ports
@@ -45,8 +47,7 @@ int8_t rollerMotorPort = 20;
 pros::Motor intake(intakeMotorPort);
 pros::Motor wrist(wristMotorPort);
 pros::Motor roller(rollerMotorPort);
-
-
+pros::Motor CascadeLift(CascadeLiftMotorPort);
 
 
 
@@ -80,6 +81,8 @@ lemlib::TrackingWheel horizontal_tracking_wheel(&horizontal_sensor, lemlib::Omni
 lemlib::TrackingWheel vertical_tracking_wheel(&vertical_sensor, lemlib::Omniwheel::NEW_2, -2.75);
 
 
+
+// Odom Sensors [Vertical Tracking Wheel, Horizontal and IMU]
 lemlib::OdomSensors sensors(&vertical_tracking_wheel, // vertical tracking wheel 1, set to null
                             nullptr, // vertical tracking wheel 2, set to nullptr as we are using IMEs
                             &horizontal_tracking_wheel, // horizontal tracking wheel 1
@@ -103,7 +106,9 @@ lemlib::ControllerSettings lateral_controller(10, // proportional gain (kP)
                                               20 // maximum acceleration (slew)
 );
 
-// angular PID controller
+// angular PID controller 
+
+//! Tuning this first
 lemlib::ControllerSettings angular_controller(2, // proportional gain (kP)
                                               0, // integral gain (kI)
                                               10, // derivative gain (kD)

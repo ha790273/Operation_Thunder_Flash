@@ -1,4 +1,5 @@
 #include "main.h"
+#include "pros/misc.h"
 #include "pros/misc.hpp"
 #include "math.h"
 #include <string>
@@ -17,6 +18,7 @@ V1.1.3
 Last change: 9/18/2026 
 
 *    - Added notes about the Cascade bot    
+TODO: - Tune the turning PID and lateral PID for the drivetrain when it's built
 
 */
 
@@ -161,10 +163,20 @@ void opcontrol() {
         
     
         }else if (master.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_L2)) {
-            intake.move(HalfSpeed);
+            intake.move(-127);
 
         }else {
             intake.move(Stop);
+        }
+
+        if (master.get_digital(pros::E_CONTROLLER_DIGITAL_R1)){
+            CascadeLift.move(127);
+
+            
+        } else if (master.get_digital(pros::E_CONTROLLER_DIGITAL_R2)){
+            CascadeLift.move(-127);
+        } else {
+            CascadeLift.move(Stop);
         }
 
           // delay to save resources
