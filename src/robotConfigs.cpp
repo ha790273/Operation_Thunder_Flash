@@ -29,8 +29,8 @@ Roller uses a 5.5W motor
 int8_t leftFrontPort = 1;
 int8_t leftBackPort = 2;
 
-int8_t rightFrontPort = 3;
-int8_t rightBackPort = 4;
+int8_t rightFrontPort = -3;
+int8_t rightBackPort = -4;
 
 // Cascade Motors
 
