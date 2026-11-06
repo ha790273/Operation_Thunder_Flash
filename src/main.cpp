@@ -128,6 +128,12 @@ void autonomous() {
 
     chassis.follow(BlueAlliance_txt, 10, 1000000);
     // remove after tuning PID
+    chassis.moveTo(0, 0, 1500);
+chassis.moveTo(-45.349, -22.411, 1500); 
+chassis.moveTo(-42.713, -1.055, 1500);
+chassis.moveTo(-19.247, -33.748, 1500);
+chassis.moveTo(-47.722, -49.831, 1500);
+
     
 
 }

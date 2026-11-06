@@ -70,7 +70,7 @@ pros::MotorGroup right_motors({rightFrontPort, rightBackPort}, pros::MotorGearse
 // Drivetrain and odometry
 lemlib::Drivetrain drivetrain(&left_motors, // left motor group
                               &right_motors, // right motor group
-                              10, // 10 inch track width
+                              12, // 10 inch track width
                               lemlib::Omniwheel::NEW_275, // using new 2.75" omni wheels
                               450, // drivetrain rpm is 450
                               2 // horizontal drift is 2 (for now)
