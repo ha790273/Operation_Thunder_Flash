@@ -1,36 +1,43 @@
-#pragma once
 
+#ifndef ROBOT_CONFIGS_H
+#define ROBOT_CONFIGS_H
 
-#include "lemlib/chassis/chassis.hpp"
+#include "lemlib/api.hpp"
+#include "pros/motors.hpp"
 #include "pros/rotation.hpp"
 #include "pros/imu.hpp"
-#include "pros/vision.hpp"
-#include "pros/motors.hpp"
 
-// * #pragma once (use if feeling lazy at times)
 
-// Drive train stuff
+// Drivetrain
 extern pros::MotorGroup left_motors;
 extern pros::MotorGroup right_motors;
+
+// LemLib
 extern lemlib::Chassis chassis;
+extern lemlib::Drivetrain drivetrain;
 
-
-// Odometry headers for main file
+// Odometry
 extern lemlib::OdomSensors sensors;
-extern pros::Imu imu;
+// extern pros::Imu imu;
+
+
+/*
 extern pros::Rotation vertical_sensor;
 extern pros::Rotation horizontal_sensor;
-extern lemlib::ControllerSettings lateral_controller; // lateral PID Controller settings
-extern lemlib::ControllerSettings angular_controller; // angular PID Controller settings
 
-// Other motors for the bot
 
+*/
+
+// PID controllers
+extern lemlib::ControllerSettings lateral_controller;
+extern lemlib::ControllerSettings angular_controller;
+
+// Other motors
 extern pros::Motor intake;
 extern pros::Motor wrist;
 extern pros::Motor roller;
 extern pros::Motor CascadeLift;
 
 
-// Vision
-extern pros::Vision vision_sensor;
 
+#endif

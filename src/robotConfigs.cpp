@@ -2,47 +2,31 @@
 #include "lemlib/api.hpp" // IWYU pragma: keep
 #include "robotConfigs.h" // IWYU pragma: keep
 #include "pros/motors.hpp"
+#include <cstdint>
 
 
 
-/*
-*                       Cascade Notes
-
-TODO:  Get track length, tune the PIDS and configure  IMU and test odom tracking
-TODO: Get proper odom spacing for tracking wheels
-
-Bot uses Blue motor cartridges on the drivetrain at 450 RPM
-? Cascade 22W
-
-The Intake uses a 5.5W motor at 600 RPM
-Wrist uses a 5.5W motor at 100 RPM
-Roller uses a 5.5W motor
 
 
-! Bot is also going to use IME's (Internal Motor Encoders) and possible pneumatics
 
-        
 
-*/
 
 // Drivetrain Motors
-int8_t leftFrontPort = 1;
-int8_t leftBackPort = 2;
-
-int8_t rightFrontPort = -3;
-int8_t rightBackPort = -4;
-
+constexpr std::int8_t leftFrontPort = 1;
+constexpr std::int8_t leftBackPort = 2;
+constexpr std::int8_t rightFrontPort = -3;
+constexpr std::int8_t rightBackPort = -4;
 // Cascade Motors
 
-int8_t intakeMotorPort = 8;
-int8_t wristMotorPort = 9;
-int8_t rollerMotorPort = 20;
 
-int8_t CascadeLiftMotorPort = 16;
-
+constexpr std::int8_t intakeMotorPort = 8;
+constexpr std::int8_t wristMotorPort = 9;
+constexpr std::int8_t rollerMotorPort = 20;
+constexpr std::int8_t CascadeLiftMotorPort = 16;
 
 
 // General Motor Ports
+
 
 pros::Motor intake(intakeMotorPort);
 pros::Motor wrist(wristMotorPort);
@@ -53,17 +37,35 @@ pros::Motor CascadeLift(CascadeLiftMotorPort);
 
 
 
+
+
+
+
+
 // Sensors + Odom stuff
-pros::Imu imu(10);// create an imu on port 10
-pros::Vision vision_sensor(7); // Initialize vision sensor on port 7
+
+
+/*
+
+
+pros::Imu imu(21);// create an imu on port 10
 pros::Rotation vertical_sensor(5);
 pros::Rotation horizontal_sensor(6);
+*/
+
+
+
+
+
 
 
 
 // Drivetrain motor groups
-pros::MotorGroup left_motors({leftFrontPort, leftBackPort}, pros::MotorGearset::blue); // left motors on ports 
-pros::MotorGroup right_motors({rightFrontPort, rightBackPort}, pros::MotorGearset::blue); // right motors on ports 
+pros::MotorGroup left_motors({leftFrontPort, leftBackPort}, pros::MotorGearset::blue); // left motors on ports
+pros::MotorGroup right_motors({rightFrontPort, rightBackPort}, pros::MotorGearset::blue); // right motors on ports
+
+
+
 
 
 
@@ -77,24 +79,37 @@ lemlib::Drivetrain drivetrain(&left_motors, // left motor group
 );
 
 
+/*
 lemlib::TrackingWheel horizontal_tracking_wheel(&horizontal_sensor, lemlib::Omniwheel::NEW_2, -5.75);
 lemlib::TrackingWheel vertical_tracking_wheel(&vertical_sensor, lemlib::Omniwheel::NEW_2, -2.75);
 
 
 
+
+*/
+
+
+
+
+
+
 // Odom Sensors [Vertical Tracking Wheel, Horizontal and IMU]
-lemlib::OdomSensors sensors(&vertical_tracking_wheel, // vertical tracking wheel 1, set to null
+lemlib::OdomSensors sensors(nullptr, // vertical tracking wheel 1, set to null
                             nullptr, // vertical tracking wheel 2, set to nullptr as we are using IMEs
-                            &horizontal_tracking_wheel, // horizontal tracking wheel 1
+                            nullptr, // horizontal tracking wheel 1
                             nullptr, // horizontal tracking wheel 2, set to nullptr as we don't have a second one
-                            &imu // inertial sensor
+                            nullptr // inertial sensor
 );
 
 
 
-//!                                          PID 
 
-// lateral PID controller 
+
+
+//!                                          PID
+
+
+// lateral PID controller
 lemlib::ControllerSettings lateral_controller(10, // proportional gain (kP)
                                               0, // integral gain (kI)
                                               3, // derivative gain (kD)
@@ -106,7 +121,9 @@ lemlib::ControllerSettings lateral_controller(10, // proportional gain (kP)
                                               20 // maximum acceleration (slew)
 );
 
-// angular PID controller 
+
+// angular PID controller
+
 
 //! Tuning this first
 lemlib::ControllerSettings angular_controller(2, // proportional gain (kP)
@@ -121,11 +138,15 @@ lemlib::ControllerSettings angular_controller(2, // proportional gain (kP)
 );
 
 
+
+
 // input curve for throttle input during driver control
 lemlib::ExpoDriveCurve throttle_curve(3, // joystick deadband out of 127
                                      10, // minimum output where drivetrain will move out of 127
                                      1.019 // expo curve gain
 );
+
+
 
 
 // input curve for steer input during driver control
@@ -135,12 +156,18 @@ lemlib::ExpoDriveCurve steer_curve(3, // joystick deadband out of 127
 );
 
 
+
+
 // create the chassis
 lemlib::Chassis chassis(drivetrain, // drivetrain settings
                         lateral_controller, // lateral PID settings
                         angular_controller, // angular PID settings
                         sensors, // odometry sensors
-                        &throttle_curve, 
+                        &throttle_curve,
                         &steer_curve
 );
+
+
+
+
 
