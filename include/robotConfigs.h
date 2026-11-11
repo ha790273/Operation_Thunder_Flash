@@ -2,7 +2,7 @@
 #ifndef ROBOT_CONFIGS_H
 #define ROBOT_CONFIGS_H
 
-#include "lemlib/api.hpp"
+#include "lemlib/api.hpp" // IWYU pragma: keep
 #include "pros/motors.hpp"
 #include "pros/rotation.hpp"
 #include "pros/imu.hpp"

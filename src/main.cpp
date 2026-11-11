@@ -107,6 +107,8 @@ void autonomous() {
     chassis.turnToHeading(90, 3000);
 
     pros::lcd::set_text(2, "Turn completed");
+    // chassis.turnToHeading(270, 4000); // turns the robot to face 270 degrees,
+                                  // with a timeout of 4000 ms
 }
 
 
