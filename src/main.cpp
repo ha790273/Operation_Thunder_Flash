@@ -3,10 +3,11 @@
 #include "pros/llemu.hpp"
 #include "pros/rtos.hpp"
 #include <cstdint>
+
+
 /*
 
-
-V1.1.3
+V0.1.4
 
 
 Last change: 11/10/2026
@@ -14,6 +15,8 @@ Last change: 11/10/2026
 
 *    - Debugging to see why robot screen shows DATA ABORT
 TODO: - Find out whats causing DATA ABORT on robot
+
+TODO: - Upload other peoples code onto the bot and test it
 
 
 */
@@ -88,17 +91,23 @@ void initialize() {
 
 
 
-
-
-
-
-
 */
+void initialize() {
+    pros::lcd::initialize(); // initialize brain screen
+    chassis.calibrate(false); // calibrate sensors
+    // print position to brain screen
+    pros::Task screen_task([&]() {
+        while (true) {
+            // print robot location to the brain screen
+            pros::lcd::print(0, "X: %f", chassis.getPose().x); // x
+            pros::lcd::print(1, "Y: %f", chassis.getPose().y); // y
+            pros::lcd::print(2, "Theta: %f", chassis.getPose().theta); // heading
+            // delay to save resources
+            pros::delay(20);
+        }
+    });
+}
 
-
-
-
-// initialize function. Runs on program startup
 
 
 void autonomous() {

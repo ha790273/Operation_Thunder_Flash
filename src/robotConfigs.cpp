@@ -16,22 +16,27 @@ constexpr std::int8_t leftFrontPort = 1;
 constexpr std::int8_t leftBackPort = 2;
 constexpr std::int8_t rightFrontPort = -3;
 constexpr std::int8_t rightBackPort = -4;
+
+
+
+
 // Cascade Motors
-
-
 constexpr std::int8_t intakeMotorPort = 8;
 constexpr std::int8_t wristMotorPort = 9;
 constexpr std::int8_t rollerMotorPort = 20;
 constexpr std::int8_t CascadeLiftMotorPort = 16;
+constexpr std::int8_t CascadeLiftMotorPort2 = 17;
 
 
-// General Motor Ports
-
-
+// Intakes and rollers
 pros::Motor intake(intakeMotorPort);
 pros::Motor wrist(wristMotorPort);
 pros::Motor roller(rollerMotorPort);
-pros::Motor CascadeLift(CascadeLiftMotorPort);
+
+
+// Cascade Motors
+pros::Motor CascadeLeft(CascadeLiftMotorPort);
+pros::Motor CascadeRight(CascadeLiftMotorPort2);
 
 
 
@@ -42,7 +47,7 @@ pros::Motor CascadeLift(CascadeLiftMotorPort);
 
 
 
-// Sensors + Odom stuff
+// Imu and Sensors
 
 
 /*
@@ -87,7 +92,6 @@ lemlib::TrackingWheel vertical_tracking_wheel(&vertical_sensor, lemlib::Omniwhee
 
 
 */
-
 
 
 

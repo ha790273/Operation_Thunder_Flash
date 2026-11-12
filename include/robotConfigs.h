@@ -36,7 +36,8 @@ extern lemlib::ControllerSettings angular_controller;
 extern pros::Motor intake;
 extern pros::Motor wrist;
 extern pros::Motor roller;
-extern pros::Motor CascadeLift;
+extern pros::Motor CascadeLeft;
+extern pros::Motor CascadeRight;
 
 
 
