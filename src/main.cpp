@@ -5,6 +5,7 @@
 #include <cstdint>
 #include "motorTemp.hpp"
 #include <string>
+
 /*
 
 V0.1.4
@@ -73,17 +74,17 @@ void on_center_button() {
     }
 }
 
+
 void initialize() {
-    pros::lcd::initialize(); // initialize brain screen
     pros::delay(50);
     chassis.calibrate(false); // calibrate sensors
     // print position to brain screen
     pros::Task screen_task([&]() {
         while (true) {
             // print robot location to the brain screen
-            pros::lcd::print(0, "X: %f", chassis.getPose().x); // x
-            pros::lcd::print(1, "Y: %f", chassis.getPose().y); // y
-            pros::lcd::print(2, "Theta: %f", chassis.getPose().theta); // heading
+            pros::screen::print(pros::E_TEXT_MEDIUM, 0, "X: %f", chassis.getPose().x); // x
+            pros::screen::print(pros::E_TEXT_MEDIUM, 1, "Y: %f", chassis.getPose().y); // y
+            pros::screen::print(pros::E_TEXT_MEDIUM, 2, "Theta: %f", chassis.getPose().theta); // heading
             // delay to save resources
             pros::delay(20);
         }
@@ -95,39 +96,37 @@ void initialize() {
 static pros::Task screen_task([]() {
         while (true) {
             // Display robot coordinates
-            pros::lcd::print(0, "X: %f", chassis.getPose().x);
-            pros::lcd::print(1, "Y: %f", chassis.getPose().y);
-            pros::lcd::print(2, "Theta: %f", chassis.getPose().theta);
+            pros::screen::print(pros::E_TEXT_MEDIUM, 0, "X: %f", chassis.getPose().x);
+            pros::screen::print(pros::E_TEXT_MEDIUM, 1, "Y: %f", chassis.getPose().y);
+            pros::screen::print(pros::E_TEXT_MEDIUM, 2, "Theta: %f", chassis.getPose().theta);
             // Drivetrain motor temperatures
-            pros::lcd::set_text(4, "LeftBackTemp: " +
-                std::to_string(MotorTemps.leftBackTemp) + " C");
+            pros::screen::print(pros::E_TEXT_MEDIUM, 4, "LeftBackTemp: %s C",
+                std::to_string(MotorTemps.leftBackTemp).c_str());
 
-            pros::lcd::set_text(5, "LeftFrontTemp: " +
-                std::to_string(MotorTemps.leftFrontTemp) + " C");
+            pros::screen::print(pros::E_TEXT_MEDIUM, 5, "LeftFrontTemp: %s C",
+                std::to_string(MotorTemps.leftFrontTemp).c_str());
 
-            pros::lcd::set_text(6, "RightBackTemp: " +
-                std::to_string(MotorTemps.rightBackTemp) + " C");
+            pros::screen::print(pros::E_TEXT_MEDIUM, 6, "RightBackTemp: %s C",
+                std::to_string(MotorTemps.rightBackTemp).c_str());
 
-            pros::lcd::set_text(7, "RightFrontTemp: " +
-                std::to_string(MotorTemps.rightFrontTemp) + " C");
+            pros::screen::print(pros::E_TEXT_MEDIUM, 7, "RightFrontTemp: %s C",
+                std::to_string(MotorTemps.rightFrontTemp).c_str());
 
 
             // delay to save resources
             pros::delay(20);
         }
     });
-
-
 */
 
 
 void autonomous() {
-    pros::lcd::set_text(1, "Starting turn");
+    pros::screen::print(pros::E_TEXT_MEDIUM, 1, "Starting turn");
     chassis.turnToHeading(90, 10000);
     chassis.waitUntilDone();
     chassis.getPose();
-    
-    
+
+
 }
 
 

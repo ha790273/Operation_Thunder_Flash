@@ -99,6 +99,8 @@ lemlib::Drivetrain drivetrain(&left_motors, // left motor group
 lemlib::TrackingWheel horizontal_tracking_wheel(&horizontal_sensor, lemlib::Omniwheel::NEW_2, -5.75);
 lemlib::TrackingWheel vertical_tracking_wheel(&vertical_sensor, lemlib::Omniwheel::NEW_2, -2.75);
 
+*/
+
 
 // Odom Sensors [Vertical Tracking Wheel, Horizontal and IMU]
 lemlib::OdomSensors sensors(nullptr, // vertical tracking wheel 1, set to null
@@ -107,25 +109,6 @@ lemlib::OdomSensors sensors(nullptr, // vertical tracking wheel 1, set to null
                             nullptr, // horizontal tracking wheel 2, set to nullptr as we don't have a second one
                             nullptr // inertial sensor
 );
-
-
-
-*/
-// Create tracking wheels from your drivetrain motor groups (required when not using an IMU)
-// Note: Offset is half of your track width (-6.0 and 6.0 for a 12" track width, or -5.0 and 5.0 for 10")
-lemlib::TrackingWheel left_tracking_wheel(&left_motors, lemlib::Omniwheel::NEW_275, -6.0, 450);
-lemlib::TrackingWheel right_tracking_wheel(&right_motors, lemlib::Omniwheel::NEW_275, 6.0, 450);
-
-// Odom Sensors [Vertical Tracking Wheels, Horizontal Tracking Wheels, and IMU]
-lemlib::OdomSensors sensors(&left_tracking_wheel,  // vertical tracking wheel 1
-                            &right_tracking_wheel, // vertical tracking wheel 2
-                            nullptr,               // horizontal tracking wheel 1
-                            nullptr,               // horizontal tracking wheel 2
-                            nullptr                // inertial sensor (disabled)
-);
-
-
-
 
 
 
