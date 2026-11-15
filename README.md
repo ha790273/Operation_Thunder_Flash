@@ -1,1 +1,2 @@
-master branch is new untested code and main is orginal code
+# Branches
+Master branch is new untested code and the Main Branch is orginal code
