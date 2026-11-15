@@ -69,9 +69,10 @@ void on_center_button() {
 }
 
 
-/*
+
 void initialize() {
     pros::lcd::initialize(); // initialize brain screen
+    pros::delay(50);
     chassis.calibrate(false); // calibrate sensors
     // print position to brain screen
     pros::Task screen_task([&]() {
@@ -87,18 +88,36 @@ void initialize() {
 }
 
 
+/*
+static pros::Task screen_task([]() {
+        while (true) {
+            // Display robot coordinates
+            pros::lcd::print(0, "X: %f", chassis.getPose().x);
+            pros::lcd::print(1, "Y: %f", chassis.getPose().y);
+            pros::lcd::print(2, "Theta: %f", chassis.getPose().theta);
+            // Drivetrain motor temperatures
+            pros::lcd::set_text(4, "LeftBackTemp: " +
+                std::to_string(MotorTemps.leftBackTemp) + " C");
+
+            pros::lcd::set_text(5, "LeftFrontTemp: " +
+                std::to_string(MotorTemps.leftFrontTemp) + " C");
+
+            pros::lcd::set_text(6, "RightBackTemp: " +
+                std::to_string(MotorTemps.rightBackTemp) + " C");
+
+            pros::lcd::set_text(7, "RightFrontTemp: " +
+                std::to_string(MotorTemps.rightFrontTemp) + " C");
 
 
-
-
+            // delay to save resources
+            pros::delay(20);
+        }
+    });
 
 
 */
 
 
-
-
-// initialize function. Runs on program startup
 
 
 void autonomous() {
