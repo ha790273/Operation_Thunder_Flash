@@ -46,7 +46,6 @@ pros::Motor CascadeLift(CascadeLiftMotorPort);
 
 /*
 
-
 pros::Imu imu(21);// create an imu on port 10
 pros::Rotation vertical_sensor(5);
 pros::Rotation horizontal_sensor(6);
