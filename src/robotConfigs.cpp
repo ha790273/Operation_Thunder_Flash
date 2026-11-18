@@ -64,12 +64,12 @@ pros::Motor CascadeRight(CascadeLiftMotorPort2);
 /*
 
 
-pros::Imu imu(21);// create an imu on port 10
+
 pros::Rotation vertical_sensor(5);
 pros::Rotation horizontal_sensor(6);
 */
 
-
+pros::Imu imu(21);// create an imu on port 10
 
 
 
@@ -107,7 +107,7 @@ lemlib::OdomSensors sensors(nullptr, // vertical tracking wheel 1, set to null
                             nullptr, // vertical tracking wheel 2, set to nullptr as we are using IMEs
                             nullptr, // horizontal tracking wheel 1
                             nullptr, // horizontal tracking wheel 2, set to nullptr as we don't have a second one
-                            nullptr // inertial sensor
+                            &imu // inertial sensor
 );
 
 
