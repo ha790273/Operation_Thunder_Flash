@@ -1,22 +1,21 @@
 #include "main.h"
-#include "robotConfigs.h"
 #include "pros/llemu.hpp"
 #include "pros/rtos.hpp"
 #include <cstdint>
-#include "motorTemp.hpp"
 #include <string>
+
+// Configs
+#include "robotConfigs.h"
+#include "motorTemp.hpp"
+
 
 /*
 V0.1.4
 
 Last change: 11/15/2026
 
+TODO: Tune PIDS in robotConfigs
 
-*    - Debugging to see why robot screen shows DATA ABORT
-TODO: - Find out whats causing DATA ABORT on robot?? 
-! Idk if the issue has been fixed?
-
-TODO: - Test and fix Yahyas code? 11/13/2026 - Person didn't show up
 
 
 */
@@ -78,6 +77,7 @@ void initialize() {
     pros::delay(50);
     chassis.calibrate(); // calibrate sensors
     
+    
     // print position to brain screen
     pros::Task screen_task([&]() {
         while (true) {
@@ -108,7 +108,7 @@ void initialize() {
 
 /*
 void initialize() {
-    pros::delay(50);  bnm,.bnm,./ghjkl;SSASDFtrtt0-=-0890-=0---=
+    pros::delay(50);  
     chassis.calibrate(false); // calibrate sensors
     
     // print position to brain screen
